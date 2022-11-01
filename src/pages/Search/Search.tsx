@@ -8,6 +8,8 @@ import axios from 'axios';
 import { IDictionary, DataSource, AnimalData } from './Interface';
 import './Search.css'
 import Toast from '../../components/Toast/Toast';
+import { ToastProps } from '../../components/Toast/Interface'
+
 
 //This configuration
 const dataSource:IDictionary = {
@@ -29,7 +31,14 @@ const Search = () => {
     let breedListInit: Array<AnimalData> = [];
     const breedList = useRef(breedListInit);
     const [picList, setPicList] = useState([]);
-    const [openToast, setOpenToast] = useState(false);
+    const [toastInfo, setToastInfo] = useState()
+    //const [openToast, setOpenToast] = useState(false);
+    let toastOptions: ToastProps = {
+        open: false,
+        messageText: '',
+        severity: 'success'
+    }
+    const [openToast, setOpenToast] = useState(toastOptions);
     const [selectedDataSource, setSelectedDataSource] = useState("dogs");
     const picListShowSize = useRef(25);
     const querySearch = useRef("");
@@ -92,7 +101,13 @@ const Search = () => {
             
             axios.get(url, {})
                 .then((response) => {
-                    setOpenToast(() => true);
+                    
+                    if(response.data.length === 0) {
+                        setOpenToast({...openToast, open:true, messageText:'Search returned empty', severity:'warning'});
+                    }else{
+                        setOpenToast({...openToast, open:true, messageText:'Search successful', severity:'success'});
+                    }
+
                     if(selectedDataSource === "dogs") {
                         setPicList(() => response.data.message);
                         return
@@ -100,6 +115,9 @@ const Search = () => {
                     setPicList(() => response.data);
                 })
                 .catch((error) => {
+
+                    setOpenToast({...openToast, open:true, messageText:error.response.data.message, severity:'error'});
+
                     if(error.code === "ERR_BAD_REQUEST" && picList.length>0){
                         setPicList(() => []);
                     }
@@ -138,16 +156,16 @@ const Search = () => {
     };
 
     const closeModal = () => {
-        setOpenToast(() => false);
+        setOpenToast({...openToast, open:false});
     }
     
     return (
         <div>
             <Toast
-                open={openToast}
+                open={openToast.open}
                 close={closeModal}
-                messageText={"Pesquisa bem sucedida"}
-                severity={"success"}
+                messageText={openToast.messageText}
+                severity={openToast.severity}
             />
             <div className="searchArea">
                 <SearchInput
