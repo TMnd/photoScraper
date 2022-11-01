@@ -11,7 +11,7 @@ import Toast from '../../components/Toast/Toast';
 import { ToastProps } from '../../components/Toast/Interface'
 
 
-//This configuration
+//This configuration should be better
 const dataSource:IDictionary = {
     "dogs":{
         "baseUrl":"https://dog.ceo/api/breed",
@@ -31,8 +31,7 @@ const Search = () => {
     let breedListInit: Array<AnimalData> = [];
     const breedList = useRef(breedListInit);
     const [picList, setPicList] = useState([]);
-    const [toastInfo, setToastInfo] = useState()
-    //const [openToast, setOpenToast] = useState(false);
+    const [toastInfo, setToastInfo] = useState();
     let toastOptions: ToastProps = {
         open: false,
         messageText: '',
