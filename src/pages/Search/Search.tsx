@@ -7,6 +7,7 @@ import { SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
 import { IDictionary, DataSource, AnimalData } from './Interface';
 import './Search.css'
+import Toast from '../../components/Toast/Toast';
 
 //This configuration
 const dataSource:IDictionary = {
@@ -28,6 +29,7 @@ const Search = () => {
     let breedListInit: Array<AnimalData> = [];
     const breedList = useRef(breedListInit);
     const [picList, setPicList] = useState([]);
+    const [openToast, setOpenToast] = useState(false);
     const [selectedDataSource, setSelectedDataSource] = useState("dogs");
     const picListShowSize = useRef(25);
     const querySearch = useRef("");
@@ -90,6 +92,7 @@ const Search = () => {
             
             axios.get(url, {})
                 .then((response) => {
+                    setOpenToast(() => true);
                     if(selectedDataSource === "dogs") {
                         setPicList(() => response.data.message);
                         return
@@ -134,28 +137,35 @@ const Search = () => {
         setSelectedDataSource(event.target.value as string);
     };
 
+    const closeModal = () => {
+        setOpenToast(() => false);
+    }
+    
     return (
         <div>
-            <>
-                <div className="searchArea">
-                    <SearchInput
-                        // label={`${dataSource.dogs.queryInfo}`}
-                        label={`${dataSource[selectedDataSource].queryInfo}`}
-                        request={search}
-                        selectHandler={handleChange}
-                        selectValue={selectedDataSource}
-                    />
+            <Toast
+                open={openToast}
+                close={closeModal}
+                messageText={"Pesquisa bem sucedida"}
+                severity={"success"}
+            />
+            <div className="searchArea">
+                <SearchInput
+                    label={`${dataSource[selectedDataSource].queryInfo}`}
+                    request={search}
+                    selectHandler={handleChange}
+                    selectValue={selectedDataSource}
+                />
+            </div>
+            <div className='searchResulArea'>
+            {picList.length>0 ?
+                <div className='searchGallery'>
+                    {gallery}
                 </div>
-                <div className='searchResulArea'>
-                {picList.length>0 ?
-                    <div className='searchGallery'>
-                        {gallery}
-                    </div>
-                    :
-                    <Alert severity="warning">The search returned empty</Alert>
-                }
-                </div>
-            </>
+                :
+                <Alert severity="warning">The search returned empty</Alert>
+            }
+            </div>
         </div>
     )
 }

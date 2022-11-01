@@ -54,7 +54,7 @@ export function getCodeFromNameIfExists(inputList: Array<AnimalData>, query:stri
     let output: string = query;
 
     for(let animal of inputList){
-        console.log(animal);
+
         let animalName = animal.name.toLowerCase();
         if(animal.id == null) { //It means in the structure of the list, all ids are null.
             break;
