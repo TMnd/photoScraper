@@ -1,0 +1,14 @@
+.appBarMain{
+    background: var(--navbar-bg-color) !important;
+    color: var(--navbar-text-color) !important;
+}
+
+.nav-bar-links{
+    margin-left: 15px;
+    text-decoration: none;
+    color: var(--navbar-text-color);
+}
+
+.nav-bar-links:hover{
+    font-weight: bold;
+}

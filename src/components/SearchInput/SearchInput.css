@@ -1,0 +1,11 @@
+.search-input-select{
+    bottom: 1.5rem !important;
+    background-color: var(--search-input-background);
+    width: 100px;
+}
+
+.search-input{
+    margin-bottom: 3rem !important;
+    width:40%;
+    background-color: var(--search-input-background);
+}

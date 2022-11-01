@@ -1,0 +1,43 @@
+.searchArea{
+    background: var(--search-area);
+    padding-top: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textField{
+    margin-bottom: 3rem !important;
+    width:60%;
+    background-color: var(--search-input-background);
+}
+
+.searchResulArea {
+    margin-top: 30px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 30px;
+}
+
+.searchGallery{
+    display: grid;
+    grid-gap: 44px;
+    row-gap: 67px;
+    column-gap: 10px;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+}
+
+@media (max-width: 768px) {
+    .searchResulArea{
+        text-align: center;
+    }
+
+    .searchGallery {
+      row-gap: 15px;
+    }
+
+    .searchGallery > div {
+        max-width: unset;
+    }
+} 

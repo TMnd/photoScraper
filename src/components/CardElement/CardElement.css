@@ -1,0 +1,14 @@
+.model-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.model-close-icon{
+    padding-top: 1.3rem;
+    padding-right: 1.5rem;
+}
+
+.model-close-icon:hover{
+    cursor: pointer;
+}
