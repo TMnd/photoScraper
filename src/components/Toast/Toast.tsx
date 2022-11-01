@@ -13,7 +13,7 @@ const Toast = ({open, close, messageText, severity}:ToastProps) => {
 
 
     return (
-        <Snackbar open={open} autoHideDuration={400000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
             <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
                 {messageText}
             </Alert>
