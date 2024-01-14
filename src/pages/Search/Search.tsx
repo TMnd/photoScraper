@@ -31,7 +31,6 @@ const Search = () => {
     let breedListInit: Array<AnimalData> = [];
     const breedList = useRef(breedListInit);
     const [picList, setPicList] = useState([]);
-    const [toastInfo, setToastInfo] = useState();
     let toastOptions: ToastProps = {
         open: false,
         messageText: '',
@@ -78,7 +77,7 @@ const Search = () => {
         return () => {
             cancelToken.cancel();
         }
-
+// eslint-disable-next-line
     }, [selectedDataSource]);
 
     const search = (query:string) => {
