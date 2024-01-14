@@ -26,7 +26,7 @@ function App() {
   
   return (
     <div className='site-body'>
-      <BrowserRouter>
+      <BrowserRouter basename="/photoScraper">
         <Navbar navBarElements={menuOptions}/>
         <main className="site-main-body">
           <div>
